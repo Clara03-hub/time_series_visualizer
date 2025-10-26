@@ -23,10 +23,10 @@ def draw_bar_plot(): #create a bar plot showing average monthly page views for e
     df_bar['year'] = df_bar.index.year #extract year from the index
     df_bar['month'] = df_bar.index.month_name() #extract month name from the index
     months_order = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'] #define the order of months
-    grouped = ( 
+    grouped = (  #group the data by year and month and calculate the mean page views per month
         df_bar.groupby(['year', 'month'])['value']
         .mean()
-        .reset_index()
+        .reset_index() #reset the index to turn the groupby object back into a DataFrame
     )
     fig, ax = plt.subplots(figsize=(12,8)) #set the figure size
     sns.barplot(data=grouped, x="year", y="value", hue="month", ax=ax)
